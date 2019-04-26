@@ -1,0 +1,53 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  # 静态资源映射
+  mvc:
+    static-path-pattern: /static/**
+  # thymeleaf模版引擎渲染
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    cache: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/grade_rank?useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+#    type: com.alibaba.druid.pool.DruidDataSource
+
+#  devtools:
+#    restart:
+#      enabled: true
+#      additional-paths: resources/**,static/**,templates/**
+#      exclude: data/**
+#    #热部署生效
+#    enabled: true
+#    #设置重启的目录
+#    additional-paths: resources/**,static/**,templates/**
+#    #该目录下的内容修改不重启
+#    exclude: data/**
+
+mybatis:
+  type-aliases-package: com.ysc.graderank.pojo
+  mapper-locations: classpath:mapper/*.xml
+
+mapper:
+  mappers:
+    - com.ysc.graderank.util.MyMapper
+  not-empty: false
+  identity: MYSQL
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+

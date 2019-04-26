@@ -1,0 +1,32 @@
+package com.ysc.graderank.service;
+
+import com.ysc.graderank.mapper.AdminMapper;
+import com.ysc.graderank.pojo.Admin;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class AdminService {
+    @Autowired
+    private AdminMapper adminMapper;
+
+    public List<Admin> selectAll() {
+        List<Admin> adminList = adminMapper.selectAll();
+        return adminList;
+    }
+
+    public boolean isExist(Admin admin) {
+        List<Admin> adminList = adminMapper.select(admin);
+        return adminList.size() > 0;
+    }
+
+    public Admin getByIdAndPwd(Admin admin) {
+//        List<Admin> adminList = adminMapper.select(admin);
+
+        Admin admin2 = adminMapper.selectByPrimaryKey(admin.getId());
+        return admin2;
+    }
+
+}
