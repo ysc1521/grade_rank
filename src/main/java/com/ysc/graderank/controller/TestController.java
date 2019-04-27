@@ -4,6 +4,7 @@ import com.ysc.graderank.pojo.Admin;
 import com.ysc.graderank.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -15,7 +16,7 @@ public class TestController {
 
     @RequestMapping("/index")
     public String index() {
-        return "/login";
+        return "login";
     }
 
     @RequestMapping("/getAllAdmin")
@@ -39,9 +40,10 @@ public class TestController {
         return "hello2";
     }
 
-
-    public static void main(String[] args) {
-        Object o;
+    @RequestMapping("/layout")
+    public String layout(ModelMap map) {
+        map.addAttribute("test", "this is a test value");
+        return "layout/demo";
     }
 
 }

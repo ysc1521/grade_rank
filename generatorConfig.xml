@@ -29,7 +29,8 @@
                              type="XMLMAPPER"/>
 
 
-        <table tableName="admin" ></table>
+        <!--<table tableName="admin" ></table>-->
+        <table tableName="teacher"></table>
 
     </context>
 </generatorConfiguration>
