@@ -26,10 +26,10 @@ public class GeneratorDisplay {
 
 	} 
 	
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		try {
-			GeneratorDisplay generatorSqlmap = new GeneratorDisplay();
-			generatorSqlmap.generator();
+			GeneratorDisplay generatorSqlMap = new GeneratorDisplay();
+			generatorSqlMap.generator();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

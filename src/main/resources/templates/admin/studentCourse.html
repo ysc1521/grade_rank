@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="content-wrapper" th:fragment="content">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/admin/student">学生</a>
+            </li>
+            <li class="breadcrumb-item active">选课详情</li>
+        </ol>
+        <!-- Example DataTables Card-->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Data Table Example</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <a class="btn btn-primary" th:href="'/admin/student/addCoursePage?id=' + ${id}">新增选课</a>
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>课程号</th>
+                            <th>课程名</th>
+                            <th>学分</th>
+                            <th>选课年份</th>
+                            <th>考试成绩</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="sc : ${scList}">
+                            <!--<th><a th:href="'/admin/course/detail?id=' + ${course.id}" th:text="${course.id}"></a></th>-->
+                            <!--<th th:text="${course.name}"></th>-->
+                            <!--<th th:text="${course.credit}"></th>-->
+                            <th th:text="${sc.cid}"></th>
+                            <th th:text="${sc.course.name}"></th>
+                            <th th:text="${sc.course.credit}"></th>
+                            <th th:text="${sc.selectYear}"></th>
+                            <th th:text="${sc.score}"></th>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

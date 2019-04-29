@@ -1,23 +1,25 @@
 package com.ysc.graderank.controller;
 
 import com.ysc.graderank.pojo.Admin;
+import com.ysc.graderank.pojo.Teacher;
 import com.ysc.graderank.service.AdminService;
+import com.ysc.graderank.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
+@RequestMapping("/test")
 public class TestController {
 
     @Autowired
     private AdminService adminService;
-
-    @RequestMapping("/index")
-    public String index() {
-        return "login";
-    }
+    @Autowired
+    private TeacherService teacherService;
 
     @RequestMapping("/getAllAdmin")
     @ResponseBody
@@ -44,6 +46,18 @@ public class TestController {
     public String layout(ModelMap map) {
         map.addAttribute("test", "this is a test value");
         return "layout/demo";
+    }
+
+    @RequestMapping("/getTeacher")
+    @ResponseBody
+    public String getTeacher() {
+        List<Teacher> teacherList = teacherService.selectAll();
+        return teacherList.toString();
+    }
+
+    @RequestMapping("/test")
+    public String test() {
+        return "test";
     }
 
 }

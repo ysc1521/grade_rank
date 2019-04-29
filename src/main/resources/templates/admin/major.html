@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="content-wrapper" th:fragment="content">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active">专业</li>
+        </ol>
+        <!-- Example DataTables Card-->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Data Table Example</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <a class="btn btn-primary" href="/admin/major/detail">新增</a>
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>专业名</th>
+                            <th>年级</th>
+                            <th>计入绩点年数</th>
+                            <th>辅导员(姓名-教工号)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="major : ${majorList}">
+                            <th><a th:href="'/admin/major/detail?id=' + ${major.id}" th:text="${major.name}"></a></th>
+                            <th th:text="${major.grade}"></th>
+                            <th th:text="${major.gpaYears}"></th>
+                            <th th:text="${major.teacher != null ? (major.teacher.name + '-' + major.teacher.id) : null}"></th>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="content-wrapper" th:fragment="content">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/admin/student">学生</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="'/admin/student/course?id=' + ${student.id}">选课详情</a>
+            </li>
+            <li class="breadcrumb-item active">选课</li>
+        </ol>
+        <div>
+            <div class="container">
+                <div class="card card-login mx-auto mt-5">
+                    <div class="card-header">选课信息</div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="sid">学生学号</label>
+                            <input class="form-control" id="sid" name="sid" type="text" th:value="${student.id}" disabled="disabled">
+                        </div>
+                        <div class="form-group">
+                            <label for="studentName">学生姓名</label>
+                            <input class="form-control" id="studentName" name="studentName" type="text" th:value="${student.name}" disabled="disabled">
+                        </div>
+                        <div class="form-group">
+                            <label for="course">课程</label>
+                            <select class="form-control" id="course">
+                                <option th:each="course : ${courseList}" th:text="${course.getFullName()}" th:value="${course.id}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="selectYear">选课年份</label>
+                            <input class="form-control" id="selectYear" name="selectYear" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="score">考试成绩</label>
+                            <input class="form-control" id="score" name="score" type="text">
+                        </div>
+                        <button id="submit" class="btn btn-primary btn-block" onclick="submit()">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--&lt;!&ndash; Bootstrap core JavaScript&ndash;&gt;-->
+        <!--<script src="../../static/vendor/jquery/jquery.min.js"></script>-->
+        <!--<script src="../../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+        <!--&lt;!&ndash; Core plugin JavaScript&ndash;&gt;-->
+        <!--<script src="../../static/vendor/jquery-easing/jquery.easing.min.js"></script>-->
+        <!--</div>-->
+        <script>
+            function submit() {
+                //alert($("#id").val() + "," + $("#name").val());
+                var cid = $("#course").val();
+                if (cid === null || cid === "") {
+                    alert("课程不能为空");
+                    return;
+                }
+                $.ajax({
+                    url: "/admin/student/addCourse",
+                    data: {
+                        sid: $("#sid").val(),
+                        cid: cid,
+                        selectYear: $("#selectYear").val(),
+                        score: $("#score").val()
+                    },
+                    async: false,
+                    contentType:"application/x-www-form-urlencoded:charset=UTF-8",
+                    success: function (res) {
+                        alert("success");
+                        window.location.href="/admin/student/course?id=" + [[${student.id}]];
+                    }
+                })
+            }
+        </script>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="content-wrapper" th:fragment="content">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/admin/major">专业</a>
+            </li>
+            <li class="breadcrumb-item active" th:text="${type}"></li>
+        </ol>
+        <div>
+        <div class="container">
+            <div class="card card-login mx-auto mt-5">
+                <div class="card-header">专业信息</div>
+                <div class="card-body">
+                    <input type="hidden" id="id" th:value="${major != null ? major.id : null}"/>
+                    <div class="form-group">
+                        <label for="name">专业名</label>
+                        <input class="form-control" id="name" name="name" type="text" th:value="${major != null ? major.name : null}">
+                    </div>
+                    <div class="form-group">
+                        <label for="grade">年级</label>
+                        <input class="form-control" id="grade" name="grade" type="text" th:value="${major != null ? major.grade : null}">
+                    </div>
+                    <div class="form-group">
+                        <label for="gpaYears">计入绩点年数</label>
+                        <input class="form-control" id="gpaYears" name="gpaYears" type="text" th:value="${major != null ? major.gpaYears : null}">
+                    </div>
+                    <div class="form-group">
+                        <label for="teacher">辅导员</label>
+                        <select id="teacher" class="form-control" >
+                            <option th:each="teacher : ${teacherList}" th:text="${teacher.name} + '-' + ${teacher.id}" th:value="${teacher.id}" th:selected="${(major != null && major.teacher != null) ? teacher.id == major.teacher.id : null}"></option>
+                        </select>
+                    </div>
+                    <button id="submit" class="btn btn-primary btn-block" onclick="submit()" th:text="${type}"></button>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!--&lt;!&ndash; Bootstrap core JavaScript&ndash;&gt;-->
+        <!--<script src="../../static/vendor/jquery/jquery.min.js"></script>-->
+        <!--<script src="../../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+        <!--&lt;!&ndash; Core plugin JavaScript&ndash;&gt;-->
+        <!--<script src="../../static/vendor/jquery-easing/jquery.easing.min.js"></script>-->
+        <!--</div>-->
+        <script>
+            function submit() {
+                //alert($("#id").val() + "," + $("#name").val());
+                var name = $("#name").val();
+                var grade = $("#grade").val();
+                var gpaYears = $("#gpaYears").val();
+                var teacher = $("#teacher").val();
+                $.ajax({
+                    url: "/admin/major/add",
+                    data: {
+                        id: $("#id").val(),
+                        name: name,
+                        grade: grade,
+                        gpaYears: gpaYears,
+                        tid: teacher
+                    },
+                    async: false,
+                    contentType:"application/x-www-form-urlencoded:charset=UTF-8",
+                    success: function (res) {
+                        alert("success");
+                        window.location.href="/admin/major";
+                    }
+                })
+            }
+        </script>
+    </div>
+</div>
+</body>
+</html>
