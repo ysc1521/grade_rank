@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="content-wrapper" th:fragment="content">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <div>
+            <div class="container">
+                <div class="card card-login mx-auto mt-5">
+                    <div class="card-body">
+                        <input type="hidden" id="id" th:value="${entrySwitch.id}"/>
+                        <div class="form-group">
+                            <label for="status">开关</label>
+                            <select id="status" class="form-control">
+                                <option value="ON" th:selected="${entrySwitch.status} == 'ON'">开</option>
+                                <option value="OFF" th:selected="${entrySwitch.status} == 'OFF'">关</option>
+                            </select>
+                        </div>
+                        <div class="form-control">
+                            <label class="text-danger">ps:开关关闭与否意味着学生以及辅导员录入信息通道的开启和关闭，理论上一年仅开启一次，需慎重操作</label>
+                        </div>
+                        <button id="submit" class="btn btn-primary btn-block" onclick="submit()">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--&lt;!&ndash; Bootstrap core JavaScript&ndash;&gt;-->
+        <!--<script src="../../static/vendor/jquery/jquery.min.js"></script>-->
+        <!--<script src="../../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+        <!--&lt;!&ndash; Core plugin JavaScript&ndash;&gt;-->
+        <!--<script src="../../static/vendor/jquery-easing/jquery.easing.min.js"></script>-->
+        <!--</div>-->
+        <script>
+            function submit() {
+                //alert($("#id").val() + "," + $("#name").val());
+                var status = $("#status").val();
+                var statusCh = status === "ON" ? "开启" : "关闭";
+                var affirm = confirm("确认" + statusCh);
+                if (affirm === false) {
+                    return;
+                }
+                $.ajax({
+                    url: "/admin/updateEntrySwitch",
+                    data: {
+                        id: $("#id").val(),
+                        status: status
+                    },
+                    async: false,
+                    contentType:"application/x-www-form-urlencoded:charset=UTF-8",
+                    success: function (res) {
+                        alert(res);
+                    }
+                })
+            }
+        </script>
+    </div>
+</div>
+</body>
+</html>

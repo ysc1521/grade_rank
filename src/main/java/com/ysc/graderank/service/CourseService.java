@@ -15,11 +15,27 @@ public class CourseService {
 
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private SCService scService;
 
-//    public List<Course> selectAllFull() {
-//        List<Course> courseList = selectAll();
-//        return courseList;
-//    }
+    public List<Course> selectAllFull() {
+        List<Course> courseList = selectAll();
+        fill(courseList);
+        return courseList;
+    }
+
+    public void fill(Course course) {
+        if (course == null) {
+            return;
+        }
+        course.setScList(scService.getByCid(course.getId()));
+    }
+
+    public void fill(List<Course> courseList) {
+        for (Course course : courseList) {
+            fill(course);
+        }
+    }
 
     public List<Course> selectAll() {
         return courseMapper.selectAll();
@@ -36,5 +52,4 @@ public class CourseService {
     public void update(Course course) {
         courseMapper.updateByPrimaryKeySelective(course);
     }
-
 }

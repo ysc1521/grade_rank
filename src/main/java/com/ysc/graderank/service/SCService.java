@@ -42,4 +42,21 @@ public class SCService {
         scMapper.insert(sc);
     }
 
+    public List<SC> getByCid(Integer cid) {
+        Example example = new Example(SC.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("cid", cid);
+        List<SC> scList = scMapper.selectByExample(example);
+        return scList;
+    }
+
+    public List<SC> getBySidAndYear(int sid, int year) {
+        Example example = new Example(SC.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("sid", sid).andEqualTo("selectYear", year);
+        List<SC> scList = scMapper.selectByExample(example);
+        fill(scList);
+        return scList;
+    }
+
 }

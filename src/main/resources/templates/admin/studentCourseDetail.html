@@ -44,7 +44,7 @@
                             <input class="form-control" id="selectYear" name="selectYear" type="text">
                         </div>
                         <div class="form-group">
-                            <label for="score">考试成绩</label>
+                            <label for="score">成绩</label>
                             <input class="form-control" id="score" name="score" type="text">
                         </div>
                         <button id="submit" class="btn btn-primary btn-block" onclick="submit()">提交</button>
@@ -68,7 +68,7 @@
                     return;
                 }
                 $.ajax({
-                    url: "/admin/student/addCourse",
+                    url: "/admin/student/course/add",
                     data: {
                         sid: $("#sid").val(),
                         cid: cid,

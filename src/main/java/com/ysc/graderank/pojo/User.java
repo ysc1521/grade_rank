@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 public class User {
     @Id
-    private Long id;
+    private Integer id;
 
     private String password;
 
@@ -15,14 +15,14 @@ public class User {
     /**
      * @return id
      */
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -1,6 +1,7 @@
 package com.ysc.graderank.pojo;
 
-import javax.persistence.*;
+import javax.persistence.Id;
+import java.util.List;
 
 public class Student {
     @Id
@@ -11,6 +12,10 @@ public class Student {
     private Integer mid;
 
     private Major major;
+
+    private String password;
+
+    private List<SC> scList;
 
     /**
      * @return id
@@ -54,5 +59,21 @@ public class Student {
 
     public void setMid(Integer mid) {
         this.mid = mid;
+    }
+
+    public List<SC> getScList() {
+        return scList;
+    }
+
+    public void setScList(List<SC> scList) {
+        this.scList = scList;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

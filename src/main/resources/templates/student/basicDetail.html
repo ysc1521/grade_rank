@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/studentLayout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="content-wrapper" th:fragment="content">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/student/basic">成绩</a>
+            </li>
+            <li class="breadcrumb-item active">更新</li>
+        </ol>
+        <div>
+            <div class="container">
+                <div class="card card-login mx-auto mt-5">
+                    <div class="card-header">基础性素质详情</div>
+                    <div class="card-body">
+                        <input type="hidden" id="id" th:value="${yearGrade.id}"/>
+                        <input type="hidden" id="basicScore" th:value="${yearGrade.basicScore}"/>
+                        <div class="form-group">
+                            <label for="detail">详情</label>
+                            <textarea class="form-control" id="detail" name="detail" th:text="${yearGrade.basicDetail}" rows="8"></textarea>
+                        </div>
+                        <button id="submit" class="btn btn-primary btn-block" onclick="submit()" th:text="更新"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--&lt;!&ndash; Bootstrap core JavaScript&ndash;&gt;-->
+        <!--<script src="../../static/vendor/jquery/jquery.min.js"></script>-->
+        <!--<script src="../../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+        <!--&lt;!&ndash; Core plugin JavaScript&ndash;&gt;-->
+        <!--<script src="../../static/vendor/jquery-easing/jquery.easing.min.js"></script>-->
+        <!--</div>-->
+        <script>
+            function submit() {
+                var thisYear = new Date().getFullYear();
+
+                if (thisYear !== [[${yearGrade.year}]]) {
+                    alert("已过期，不可修改");
+                    return;
+                }
+                var basicScore = $("#basicScore").val();
+                if (basicScore !== "") {
+                    alert("已评分，不可修改");
+                    return;
+                }
+                $.ajax({
+                    url: "/student/basic/update",
+                    data: {
+                        id: $("#id").val(),
+                        detail: $("#detail").val()
+                    },
+                    async: false,
+                    contentType:"application/x-www-form-urlencoded:charset=UTF-8",
+                    success: function (res) {
+                        if (res === "success") {
+                            alert("更新成功");
+                            window.location.href = "/student/basic";
+                        } else {
+                            alert(res);
+                        }
+                    }
+                })
+            }
+        </script>
+    </div>
+</div>
+</body>
+</html>

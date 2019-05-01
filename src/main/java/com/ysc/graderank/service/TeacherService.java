@@ -53,4 +53,9 @@ public class TeacherService {
         List<Major> majorList = majorService.getByTid(teacher.getId());
         teacher.setMajorList(majorList);
     }
+
+    public boolean isExist(Integer id, String password) {
+        Teacher teacher = teacherMapper.selectByPrimaryKey(id);
+        return teacher != null && teacher.getPassword().equals(password);
+    }
 }

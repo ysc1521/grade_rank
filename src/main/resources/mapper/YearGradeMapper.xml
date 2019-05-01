@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysc.graderank.mapper.YearGradeMapper">
+  <resultMap id="BaseResultMap" type="com.ysc.graderank.pojo.YearGrade">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="year" jdbcType="INTEGER" property="year" />
+    <result column="basic_score" jdbcType="DOUBLE" property="basicScore" />
+    <result column="dev_score" jdbcType="DOUBLE" property="devScore" />
+    <result column="ave_score" jdbcType="DOUBLE" property="aveScore" />
+    <result column="com_score" jdbcType="DOUBLE" property="comScore" />
+    <result column="basic_detail" jdbcType="LONGVARCHAR" property="basicDetail" />
+    <result column="ave_rank" jdbcType="INTEGER" property="ave_rank" />
+    <result column="com_rank" jdbcType="INTEGER" property="com_rank" />
+    <result column="credit" jdbcType="DOUBLE" property="credit" />
+  </resultMap>
+</mapper>

@@ -19,7 +19,9 @@ public class WebHandleIntercept implements HandlerInterceptor {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {
-            request.getRequestDispatcher("/index").forward(request, response);
+            response.sendRedirect("/index");
+//            request.getRequestDispatcher("/index").forward(request, response);
+            return false;
         }
         return true;
     }

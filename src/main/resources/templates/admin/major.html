@@ -28,6 +28,7 @@
                             <th>年级</th>
                             <th>计入绩点年数</th>
                             <th>辅导员(姓名-教工号)</th>
+                            <th>人数</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -36,6 +37,7 @@
                             <th th:text="${major.grade}"></th>
                             <th th:text="${major.gpaYears}"></th>
                             <th th:text="${major.teacher != null ? (major.teacher.name + '-' + major.teacher.id) : null}"></th>
+                            <th><a th:href="'/admin/student?mid=' + ${major.id}" th:text="${major.studentList.size()}"></a></th>
                         </tr>
                         </tbody>
 

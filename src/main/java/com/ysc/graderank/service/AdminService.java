@@ -17,9 +17,9 @@ public class AdminService {
         return adminList;
     }
 
-    public boolean isExist(Admin admin) {
-        List<Admin> adminList = adminMapper.select(admin);
-        return adminList.size() > 0;
+    public boolean isExist(Integer id, String password) {
+        Admin admin = adminMapper.selectByPrimaryKey(id);
+        return admin != null && admin.getPassword().equals(password);
     }
 
     public Admin getByIdAndPwd(Admin admin) {

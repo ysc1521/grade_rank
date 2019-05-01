@@ -2,6 +2,7 @@ package com.ysc.graderank.service;
 
 import com.ysc.graderank.mapper.MajorMapper;
 import com.ysc.graderank.pojo.Major;
+import com.ysc.graderank.pojo.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -16,6 +17,8 @@ public class MajorService {
 
     @Autowired
     private TeacherService teacherService;
+    @Autowired
+    private StudentService studentService;
 
     public List<Major> selectAllFull() {
         List<Major> majorList = selectAll();
@@ -41,6 +44,8 @@ public class MajorService {
         if (tid != null) {
             major.setTeacher(teacherService.getById(tid));
         }
+        List<Student> studentList = studentService.getByMid(major.getId());
+        major.setStudentList(studentList);
     }
 
     public Major getById(Integer id) {

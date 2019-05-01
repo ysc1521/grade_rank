@@ -6,7 +6,7 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="tno" jdbcType="BIGINT" property="tno" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
   </resultMap>
 </mapper>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/studentLayout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="content-wrapper" th:fragment="content">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active">成绩</li>
+        </ol>
+        <!-- Example DataTables Card-->
+        <div class="card mb-3">
+            <!--<div class="card-header">-->
+            <!--<i class="fa fa-table"></i> Data Table Example</div>-->
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>年份</th>
+                            <th>成绩</th>
+                            <th>详情</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="yearGrade : ${yearGradeList}">
+                            <th th:text="${yearGrade.year}"></th>
+                            <th th:text="${yearGrade.basicScore} == null ? '未评分' : ${yearGrade.basicScore}"></th>
+                            <th><a th:href="'/student/basic/detail?year=' + ${yearGrade.year}">详情</a></th>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

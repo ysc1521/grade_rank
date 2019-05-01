@@ -23,7 +23,7 @@
                 <i class="fa fa-table"></i> Data Table Example</div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <a class="btn btn-primary" th:href="'/admin/student/addCoursePage?id=' + ${id}">新增选课</a>
+                    <a class="btn btn-primary" th:href="'/admin/student/courseDetail?id=' + ${id}">新增选课</a>
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
@@ -31,7 +31,7 @@
                             <th>课程名</th>
                             <th>学分</th>
                             <th>选课年份</th>
-                            <th>考试成绩</th>
+                            <th>成绩</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -39,7 +39,7 @@
                             <!--<th><a th:href="'/admin/course/detail?id=' + ${course.id}" th:text="${course.id}"></a></th>-->
                             <!--<th th:text="${course.name}"></th>-->
                             <!--<th th:text="${course.credit}"></th>-->
-                            <th th:text="${sc.cid}"></th>
+                            <th th:text="${sc.id}"></th>
                             <th th:text="${sc.course.name}"></th>
                             <th th:text="${sc.course.credit}"></th>
                             <th th:text="${sc.selectYear}"></th>

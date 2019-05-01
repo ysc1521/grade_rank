@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ysc.graderank.mapper.AdminMapper">
-  <resultMap id="BaseResultMap" type="com.ysc.graderank.pojo.Admin">
+<mapper namespace="com.ysc.graderank.mapper.EntrySwitchMapper">
+  <resultMap id="BaseResultMap" type="com.ysc.graderank.pojo.EntrySwitch">
     <!--
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
   </resultMap>
 </mapper>

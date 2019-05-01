@@ -16,18 +16,33 @@
         </ol>
         <!-- Example DataTables Card-->
         <div class="card mb-3">
-            <div class="card-header">
-                <i class="fa fa-table"></i> Data Table Example</div>
+            <!--<div class="card-header">-->
+                <!--<i class="fa fa-table"></i> Data Table Example</div>-->
             <div class="card-body">
                 <div class="table-responsive">
-                    <a class="btn btn-primary" href="/admin/student/detail">新增</a>
+                    <a class="btn btn-primary btn-sm" href="/admin/student/detail">新增</a>
+                    <div>
+                        <label>专业: </label>
+                        <select id="midSelect">
+                            <option value="" selected>请选择</option>
+                            <option th:each="major : ${majorList}" th:text="${major.getFullName()}" th:value="${major.id}" th:selected="${mid == major.id}"></option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>课程: </label>
+                        <select id="cidSelect">
+                            <option value="" selected>请选择</option>
+                            <option th:each="course : ${courseList}" th:text="${course.getFullName()}" th:value="${course.id}" th:selected="${cid == course.id}"></option>
+                        </select>
+                    </div>
+
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th>学号</th>
                             <th>姓名</th>
                             <th>专业</th>
-                            <th>选课详情</th>
+                            <th>选课数</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -35,7 +50,7 @@
                             <th><a th:href="'/admin/student/detail?id=' + ${student.id}" th:text="${student.id}"></a></th>
                             <th th:text="${student.name}"></th>
                             <th th:text="${student.major != null ? student.major.getFullName() : null}"></th>
-                            <th><a th:href="'/admin/student/course?id=' + ${student.id}">详情</a></th>
+                            <th><a th:href="'/admin/student/course?id=' + ${student.id}" th:text="${student.scList.size()}"></a></th>
                         </tr>
                         </tbody>
 
@@ -44,23 +59,22 @@
             </div>
         </div>
     </div>
-    <!-- /.container-fluid-->
-    <!-- Scroll to Top Button-->
-    <!--<a class="scroll-to-top rounded" href="#page-top">-->
-    <!--<i class="fa fa-angle-up"></i>-->
-    <!--</a>-->
-    <!--&lt;!&ndash; Bootstrap core JavaScript&ndash;&gt;-->
-    <!--<script src="../../static/vendor/jquery/jquery.min.js"></script>-->
-    <!--<script src="../../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
-    <!--&lt;!&ndash; Core plugin JavaScript&ndash;&gt;-->
-    <!--<script src="../../static/vendor/jquery-easing/jquery.easing.min.js"></script>-->
-    <!--&lt;!&ndash; Page level plugin JavaScript&ndash;&gt;-->
-    <!--<script src="../../static/vendor/datatables/jquery.dataTables.js"></script>-->
-    <!--<script src="../../static/vendor/datatables/dataTables.bootstrap4.js"></script>-->
-    <!--&lt;!&ndash; Custom scripts for all pages&ndash;&gt;-->
-    <!--<script src="../../static/js/sb-admin.min.js"></script>-->
-    <!--&lt;!&ndash; Custom scripts for this page&ndash;&gt;-->
-    <!--<script src="../../static/js/sb-admin-datatables.min.js"></script>-->
+    <script src="../../static/js/jquery.min.js" ></script>
+    <script type="text/javascript">
+        function selectChange() {
+            var mid = $("#midSelect").val();
+            var cid = $("#cidSelect").val();
+            window.location.href = "/admin/student?mid=" + mid + "&cid=" + cid;
+        }
+
+        $(document).ready(function() {
+            console.log("document");
+
+            $("#midSelect").change(selectChange);
+            $("#cidSelect").change(selectChange);
+        })
+    </script>
+
 </div>
 </body>
 </html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/studentLayout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="content-wrapper" th:fragment="content">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/student/dev">成绩</a>
+            </li>
+            <li class="breadcrumb-item active" th:text="${yearGrade.year}"></li>
+        </ol>
+        <!-- Example DataTables Card-->
+        <div class="card mb-3">
+            <!--<div class="card-header">-->
+            <!--<i class="fa fa-table"></i> Data Table Example</div>-->
+            <div class="card-body">
+                <div class="table-responsive">
+                    <a class="btn btn-primary" th:href="'/student/dev/modify?yid=' + ${yearGrade.id}">新增</a>
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>加分项名</th>
+                                <th>类别</th>
+                                <th>加分</th>
+                                <th>审核</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="devDetailRe : ${devDetailReList}">
+                                <th><a th:text="${devDetailRe.name}" th:href="'/student/dev/modify?id=' + ${devDetailRe.id} + '&yid=' + ${devDetailRe.yid}"></a></th>
+                                <th th:text="${devDetailRe.kind.getDesc()}"></th>
+                                <th th:text="${devDetailRe.score} == null ? '未评分' : ${devDetailRe.score}"></th>
+                                <th th:text="${devDetailRe.verify}"></th>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

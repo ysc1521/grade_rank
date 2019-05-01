@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/studentLayout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="content-wrapper" th:fragment="content">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/student/dev">成绩</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="'/student/dev/detail?yid=' + ${yearGrade.id}" th:text="${yearGrade.year}"></a>
+            </li>
+            <li class="breadcrumb-item active" th:text="${type}"></li>
+        </ol>
+        <div>
+            <div class="container">
+                <div class="card card-login mx-auto mt-5">
+                    <div class="card-header">基础性素质详情</div>
+                    <div class="card-body">
+                        <input type="hidden" id="id" th:value="${devDetailRe != null ? devDetailRe.id : null}"/>
+                        <!--<input type="hidden" id="basicScore" th:value="${yearGrade.basicScore}"/>-->
+                        <div class="form-group">
+                            <label for="name">加分项名</label>
+                            <input class="form-control" id="name" name="name" type="text" th:value="${devDetailRe != null ? devDetailRe.name : null}">
+                        </div>
+                        <div class="form-group">
+                            <label for="kind">加分类型</label>
+                            <select class="form-control" id="kind">
+                                <option th:each="devKind : ${devKindEnumList}" th:text="${devKind.getDesc()}" th:value="${devKind}" th:selected="${devDetailRe != null ? devDetailRe.kind == devKind : null}"></option>
+                            </select>
+                        </div>
+                        <button id="submit" class="btn btn-primary btn-block" onclick="submit()" th:text="${type}"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--&lt;!&ndash; Bootstrap core JavaScript&ndash;&gt;-->
+        <!--<script src="../../static/vendor/jquery/jquery.min.js"></script>-->
+        <!--<script src="../../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+        <!--&lt;!&ndash; Core plugin JavaScript&ndash;&gt;-->
+        <!--<script src="../../static/vendor/jquery-easing/jquery.easing.min.js"></script>-->
+        <!--</div>-->
+        <script>
+            function submit() {
+                var yid = [[${yearGrade.id}]];
+                $.ajax({
+                    url: "/student/dev/add",
+                    data: {
+                        id: $("#id").val(),
+                        name: $("#name").val(),
+                        kind: $("#kind").val(),
+                        yid: yid
+                    },
+                    async: false,
+                    contentType:"application/x-www-form-urlencoded:charset=UTF-8",
+                    success: function (res) {
+                        if (res === "success") {
+                            alert("成功");
+                            window.location.href = "/student/dev/detail?yid=" + yid;
+                        } else {
+                            alert(res);
+                        }
+                    }
+                })
+            }
+        </script>
+    </div>
+</div>
+</body>
+</html>

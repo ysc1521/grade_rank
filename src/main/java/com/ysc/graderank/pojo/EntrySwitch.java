@@ -2,11 +2,12 @@ package com.ysc.graderank.pojo;
 
 import javax.persistence.*;
 
-public class Admin {
+@Table(name = "entry_switch")
+public class EntrySwitch {
     @Id
     private Integer id;
 
-    private String password;
+    private String status;
 
     /**
      * @return id
@@ -23,16 +24,16 @@ public class Admin {
     }
 
     /**
-     * @return password
+     * @return status
      */
-    public String getPassword() {
-        return password;
+    public String getStatus() {
+        return status;
     }
 
     /**
-     * @param password
+     * @param status
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

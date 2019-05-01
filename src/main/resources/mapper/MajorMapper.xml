@@ -9,6 +9,6 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="grade" jdbcType="INTEGER" property="grade" />
     <result column="GPA_years" jdbcType="INTEGER" property="gpaYears" />
-    <result column="tno" jdbcType="BIGINT" property="tno" />
+    <result column="tno" jdbcType="INTEGER" property="tno" />
   </resultMap>
 </mapper>

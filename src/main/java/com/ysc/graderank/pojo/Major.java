@@ -1,6 +1,8 @@
 package com.ysc.graderank.pojo;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import java.util.List;
 
 public class Major {
     @Id
@@ -16,6 +18,8 @@ public class Major {
     private Integer tid;
 
     private Teacher teacher;
+
+    private List<Student> studentList;
 
     /**
      * @return id
@@ -97,5 +101,13 @@ public class Major {
 
     public String getFullName() {
         return grade + "级" + name;
+    }
+
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
     }
 }

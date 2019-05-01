@@ -35,8 +35,9 @@
         <!--<table tableName="major"></table>-->
         <!--<table tableName="student"></table>-->
         <!--<table tableName="course"></table>-->
-        <table tableName="sc"></table>
-
-
+        <!--<table tableName="sc"></table>-->
+        <!--<table tableName="year_grade"></table>-->
+        <!--<table tableName="dev_detail"></table>-->
+        <table tableName="entry_switch"></table>
     </context>
 </generatorConfiguration>
