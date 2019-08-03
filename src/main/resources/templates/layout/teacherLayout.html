@@ -21,40 +21,22 @@
     <body class="fixed-nav sticky-footer bg-dark" id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-            <a class="navbar-brand" href="/student/index">首页</a>
+            <a class="navbar-brand" href="/teacher/index">首页</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                        <a class="nav-link" href="/student/course">
+                        <a class="nav-link" href="/teacher/major">
                             <i class="fa fa-fw fa-dashboard"></i>
-                            <span class="nav-link-text">选课详情</span>
+                            <span class="nav-link-text">管理专业</span>
                         </a>
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                        <a class="nav-link" href="/student/basic">
+                        <a class="nav-link" href="/teacher/student">
                             <i class="fa fa-fw fa-dashboard"></i>
-                            <span class="nav-link-text">基础性素质成绩</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                        <a class="nav-link" href="/student/dev">
-                            <i class="fa fa-fw fa-area-chart"></i>
-                            <span class="nav-link-text">发展性素质成绩</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                        <a class="nav-link" href="/student/ave">
-                            <i class="fa fa-fw fa-area-chart"></i>
-                            <span class="nav-link-text">平均学分绩点成绩</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                        <a class="nav-link" href="/student/com">
-                            <i class="fa fa-fw fa-area-chart"></i>
-                            <span class="nav-link-text">综合学分绩点成绩</span>
+                            <span class="nav-link-text">学生</span>
                         </a>
                     </li>
                 </ul>
@@ -67,7 +49,7 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item" data-toggle="tooltip" data-placement="right">
-                        <a class="nav-link" href="/student/index">
+                        <a class="nav-link" href="/teacher/index">
                             <span class="nav-link-text" th:text="${session.user.id}"></span>
                         </a>
                     </li>

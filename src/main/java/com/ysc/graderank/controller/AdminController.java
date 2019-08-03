@@ -18,6 +18,8 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
+    private AdminService adminService;
+    @Autowired
     private TeacherService teacherService;
     @Autowired
     private MajorService majorService;
@@ -35,8 +37,28 @@ public class AdminController {
     private static final String COM_PASSWORD = "sdu123";
 
     @GetMapping("/index")
-    public String index() {
+    public String index(ModelMap modelMap, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        modelMap.addAttribute("admin", adminService.getById(user.getId()));
         return "admin/index";
+    }
+
+    @GetMapping("/password")
+    public String password() {
+        return "admin/password";
+    }
+
+    @GetMapping("/password/update")
+    @ResponseBody
+    public String passwordUpdate(String oldPwd, String newPwd, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        Admin admin = adminService.getById(user.getId());
+        if (!user.getPassword().equals(oldPwd)) {
+            return "原密码错误";
+        }
+        admin.setPassword(newPwd);
+        adminService.update(admin);
+        return "success";
     }
 
     // 辅导员老师
@@ -224,6 +246,8 @@ public class AdminController {
             yearGradeService.createThisYearGrade();
             return "成功开启";
         } else {
+            yearGradeService.calComScore();
+            yearGradeService.calGpa();
             return "成功关闭";
         }
     }

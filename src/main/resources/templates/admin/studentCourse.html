@@ -30,7 +30,7 @@
                             <th>课程号</th>
                             <th>课程名</th>
                             <th>学分</th>
-                            <th>选课年份</th>
+                            <th>学年</th>
                             <th>成绩</th>
                         </tr>
                         </thead>
@@ -42,15 +42,13 @@
                             <th th:text="${sc.id}"></th>
                             <th th:text="${sc.course.name}"></th>
                             <th th:text="${sc.course.credit}"></th>
-                            <th th:text="${sc.selectYear}"></th>
+                            <th th:text="${sc.getSchoolYear()}"></th>
                             <th th:text="${sc.score}"></th>
                         </tr>
                         </tbody>
-
                     </table>
                 </div>
             </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>
     </div>
 </div>

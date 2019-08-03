@@ -13,8 +13,9 @@
     <result column="ave_score" jdbcType="DOUBLE" property="aveScore" />
     <result column="com_score" jdbcType="DOUBLE" property="comScore" />
     <result column="basic_detail" jdbcType="LONGVARCHAR" property="basicDetail" />
-    <result column="ave_rank" jdbcType="INTEGER" property="ave_rank" />
-    <result column="com_rank" jdbcType="INTEGER" property="com_rank" />
+    <result column="ave_rank" jdbcType="INTEGER" property="aveRank" />
+    <result column="com_rank" jdbcType="INTEGER" property="comRank" />
     <result column="credit" jdbcType="DOUBLE" property="credit" />
+    <result column="major_student" jdbcType="INTEGER" property="majorStudent" />
   </resultMap>
 </mapper>

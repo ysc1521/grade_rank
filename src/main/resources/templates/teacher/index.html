@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/teacherlayout">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -29,13 +29,13 @@
                     <!--<input type="hidden" id="id" th:value="${ != null ? teacher.id : null}"/>-->
                     <div class="form-group">
                         <label for="id">账号</label>
-                        <input class="form-control" id="id" name="id" type="text" th:value="${admin.id}" disabled="disabled">
+                        <input class="form-control" id="id" name="id" type="text" th:value="${teacher.id}" disabled="disabled">
                     </div>
                     <div class="form-group">
                         <label for="name">姓名</label>
-                        <input class="form-control" id="name" name="name" type="text" th:value="${admin.name}" disabled="disabled">
+                        <input class="form-control" id="name" name="name" type="text" th:value="${teacher.name}" disabled="disabled">
                     </div>
-                    <a id="submit" class="btn btn-primary btn-block" href="/admin/password" th:color="white">修改密码</a>
+                    <a id="submit" class="btn btn-primary btn-block" href="/teacher/password" th:color="white">修改密码</a>
                 </div>
             </div>
         </div>

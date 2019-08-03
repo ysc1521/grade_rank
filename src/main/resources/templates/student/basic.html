@@ -30,7 +30,7 @@
                         </thead>
                         <tbody>
                         <tr th:each="yearGrade : ${yearGradeList}">
-                            <th th:text="${yearGrade.year}"></th>
+                            <th th:text="${yearGrade.getSchoolYear()}"></th>
                             <th th:text="${yearGrade.basicScore} == null ? '未评分' : ${yearGrade.basicScore}"></th>
                             <th><a th:href="'/student/basic/detail?year=' + ${yearGrade.year}">详情</a></th>
                         </tr>

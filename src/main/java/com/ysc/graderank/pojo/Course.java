@@ -9,7 +9,7 @@ public class Course {
 
     private String name;
 
-    private Integer credit;
+    private Double credit;
 
     private List<SC> scList;
 
@@ -44,14 +44,14 @@ public class Course {
     /**
      * @return credit
      */
-    public Integer getCredit() {
+    public Double getCredit() {
         return credit;
     }
 
     /**
      * @param credit
      */
-    public void setCredit(Integer credit) {
+    public void setCredit(Double credit) {
         this.credit = credit;
     }
 

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/teacherLayout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="content-wrapper" th:fragment="content">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/teacher/student">学生</a>
+            </li>
+            <li class="breadcrumb-item active" th:text="${student.name}"></li>
+        </ol>
+        <!-- Example DataTables Card-->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Data Table Example</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>学年</th>
+                            <th>基础性素质成绩</th>
+                            <th>发展性素质成绩</th>
+                            <th>平均学分绩点</th>
+                            <th>平均学分绩点排名</th>
+                            <th>综合学分绩点</th>
+                            <th>综合学分绩点排名</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="yearGrade : ${yearGradeList}">
+                            <th th:text="${yearGrade.getSchoolYear()}"></th>
+                            <th><a th:href="'/teacher/student/grade/basic?yid=' + ${yearGrade.id}" th:text="${yearGrade.getBasicScoreStr()}"></a></th>
+                            <th><a th:href="'/teacher/student/grade/dev?yid=' + ${yearGrade.id}" th:text="${yearGrade.getDevScoreStr()}"></a></th>
+                            <th th:text="${yearGrade.aveScore}"></th>
+                            <th th:text="${yearGrade.getAveScoreMajorRate()}"></th>
+                            <th th:text="${yearGrade.getComScoreStr()}"></th>
+                            <th th:text="${yearGrade.getComScoreMajorRate()}"></th>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

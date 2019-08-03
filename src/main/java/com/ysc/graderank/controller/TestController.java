@@ -9,8 +9,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -61,18 +59,7 @@ public class TestController {
     }
 
     public static void main(String[] args) {
-        List<testClass> list = new ArrayList<>();
-        list.add(new testClass(1));
-        list.add(new testClass(2));
-        list.sort(new Comparator<testClass>() {
-            @Override
-            public int compare(testClass o1, testClass o2) {
-                return o2.value - o1.value;
-            }
-        });
-        for (testClass t : list) {
-            System.out.println(t.value + "," + t.rank);
-        }
+        System.out.println(String.format(".2f%%", 1.1213));
     }
 
 }

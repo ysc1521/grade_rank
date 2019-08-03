@@ -26,15 +26,15 @@
                             <th>年份</th>
                             <th>学分</th>
                             <th>成绩</th>
-                            <th>专业排名</th>
+                            <th>专业排名比例</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="yearGrade : ${yearGradeList}">
                             <th th:text="${yearGrade.getSchoolYear()}"></th>
                             <th th:text="${yearGrade.credit}"></th>
-                            <th th:text="${yearGrade.aveScore} == null ? '未评分' : ${yearGrade.aveScore}"></th>
-                            <th th:text="${yearGrade.aveRank} == null ? '未排名' : ${yearGrade.aveRank}"></th>
+                            <th th:text="${yearGrade.aveScore} == null ? '未统计' : ${yearGrade.aveScore}"></th>
+                            <th th:text="${yearGrade.aveRank} == null ? '未排名' : ${yearGrade.getAveScoreMajorRate()}"></th>
                         </tr>
                         </tbody>
 

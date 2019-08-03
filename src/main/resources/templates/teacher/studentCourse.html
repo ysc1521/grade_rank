@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/teacherLayout">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -12,7 +12,10 @@
     <div class="container-fluid">
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active">课程</li>
+            <li class="breadcrumb-item">
+                <a th:href="'/teacher/student' + (${mid} == null ? '' : '?mid=' + ${mid})">学生</a>
+            </li>
+            <li class="breadcrumb-item active" th:text="${student.name}"></li>
         </ol>
         <!-- Example DataTables Card-->
         <div class="card mb-3">
@@ -20,28 +23,33 @@
                 <i class="fa fa-table"></i> Data Table Example</div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <a class="btn btn-primary" href="/admin/course/detail">新增</a>
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th>课程号</th>
                             <th>课程名</th>
                             <th>学分</th>
-                            <th>选课人数</th>
+                            <th>学年</th>
+                            <th>成绩</th>
                         </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="course : ${courseList}">
-                                <th><a th:href="'/admin/course/detail?id=' + ${course.id}" th:text="${course.id}"></a></th>
-                                <th th:text="${course.name}"></th>
-                                <th th:text="${course.credit}"></th>
-                                <th><a th:href="'/admin/student?cid=' + ${course.id}" th:text="${course.scList.size()}"></a> </th>
-                            </tr>
+                        <tr th:each="sc : ${scList}">
+                            <!--<th><a th:href="'/admin/course/detail?id=' + ${course.id}" th:text="${course.id}"></a></th>-->
+                            <!--<th th:text="${course.name}"></th>-->
+                            <!--<th th:text="${course.credit}"></th>-->
+                            <th th:text="${sc.id}"></th>
+                            <th th:text="${sc.course.name}"></th>
+                            <th th:text="${sc.course.credit}"></th>
+                            <th th:text="${sc.getSchoolYear()}"></th>
+                            <th th:text="${sc.score}"></th>
+                        </tr>
                         </tbody>
 
                     </table>
                 </div>
             </div>
+            <!--<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>-->
         </div>
     </div>
 </div>

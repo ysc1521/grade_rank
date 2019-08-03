@@ -29,4 +29,12 @@ public class AdminService {
         return admin2;
     }
 
+    public Admin getById(int id) {
+        return adminMapper.selectByPrimaryKey(id);
+    }
+
+    public void update(Admin admin) {
+        adminMapper.updateByPrimaryKeySelective(admin);
+    }
+
 }

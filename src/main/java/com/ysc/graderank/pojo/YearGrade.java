@@ -1,6 +1,10 @@
 package com.ysc.graderank.pojo;
 
-import javax.persistence.*;
+import com.ysc.graderank.util.ComClass;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Table(name = "year_grade")
 public class YearGrade {
@@ -33,6 +37,11 @@ public class YearGrade {
     private Integer comRank;
 
     private Double credit;
+
+    @Column(name = "major_student")
+    private Integer majorStudent;
+
+    private Student student;
 
     /**
      * @return id
@@ -170,7 +179,51 @@ public class YearGrade {
         this.credit = credit;
     }
 
+    public Integer getMajorStudent() {
+        return majorStudent;
+    }
+
+    public void setMajorStudent(Integer majorStudent) {
+        this.majorStudent = majorStudent;
+    }
+
     public String getSchoolYear() {
         return (year - 1) + "-" + year + "学年";
+    }
+
+    public String getBasicScoreStr() {
+        return basicScore == null ? ComClass.NULL_SCORE : Double.toString(basicScore);
+    }
+
+    public String getDevScoreStr() {
+        return devScore == null ? ComClass.NULL_SCORE : Double.toString(devScore);
+    }
+
+    public String getComScoreStr() {
+        return comScore == null ? ComClass.NULL_SCORE : Double.toString(comScore);
+    }
+
+    private String getFormatStr(Integer rank, Integer sum) {
+        if (sum == null || rank == null) {
+            return "未评定";
+        }
+        double rate = rank * 1.0 / sum * 100;
+        return String.format("%.4f%%(%d/%d)", rate, aveRank, majorStudent);
+    }
+
+    public String getAveScoreMajorRate() {
+        return getFormatStr(aveRank, majorStudent);
+    }
+
+    public String getComScoreMajorRate() {
+        return getFormatStr(comRank, majorStudent);
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }

@@ -94,4 +94,8 @@ public class SC {
     public void setCourse(Course course) {
         this.course = course;
     }
+
+    public String getSchoolYear() {
+        return (selectYear - 1) + "-" + selectYear + "学年";
+    }
 }

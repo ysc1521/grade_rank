@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/teacherLayout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="content-wrapper" th:fragment="content">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/teacher/student">学生</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="'/teacher/student/grade?sid=' + ${yearGrade.student.id}" th:text="${yearGrade.student.name}">学生</a>
+            </li>
+            <li class="breadcrumb-item active">发展性素质加分</li>
+        </ol>
+        <!-- Example DataTables Card-->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Data Table Example</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>加分项名</th>
+                            <th>类别</th>
+                            <th>加分</th>
+                            <th>审核</th>
+                        </tr>
+                        </thead>
+                        <tbody id="dateTableBody">
+                        <tr th:each="devDetailRe : ${devDetailReList}">
+                            <input type="hidden" name="id" th:value="${devDetailRe.id}">
+                            <th th:text="${devDetailRe.name}"></th>
+                            <th th:text="${devDetailRe.kind.getDesc()}"></th>
+                            <th class="scoreTh"><input class="form-control" type="text" name="score" th:value="${devDetailRe.score}"/></th>
+                            <th class="verifyTh"><input class="form-control" type="text" name="verify" th:value="${devDetailRe.verify}"></th>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <span class="text-danger">正常的加分项审核信息自动填入已通过，异常的可填入0分且加上异常原因</span><br>
+                    <span class="text-danger">默认加分种类上限：科技创新50分，文体特长30分，学生工作20分</span><br>
+                    <button class="btn btn-primary" onclick="submit()">提交</button><br>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function submit() {
+            var id;
+            var score;
+            var verify;
+            $("#dateTableBody  tr").each(function() {
+                id = $(this).children("input[name = 'id']").val();
+                score = $(this).find("th.scoreTh").children("input[name = 'score']").val();
+                verify = $(this).find("th.verifyTh").children("input[name = 'verify']").val();
+                console.log(id + "," + score + "," + verify);
+
+                $.ajax({
+                    url: "/teacher/student/grade/dev/update",
+                    data: {
+                        id: id,
+                        score: score,
+                        verify: verify
+                    },
+                    async: false,
+                    contentType:"application/x-www-form-urlencoded:charset=UTF-8",
+                    success: function (res) {
+
+                    }
+                })
+            });
+            $.ajax({
+                url: "/teacher/student/grade/devCal",
+                data: {
+                    yid: [[${yearGrade.id}]]
+                },
+                async: false,
+                contentType:"application/x-www-form-urlencoded:charset=UTF-8",
+                success: function (res) {
+                    alert("评分成功");
+                    window.location.href="/teacher/student/grade?sid=" + [[${yearGrade.sid}]];
+                }
+            })
+
+        }
+    </script>
+</div>
+</body>
+</html>

@@ -9,5 +9,9 @@
     <result column="sno" property="sno" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="gpa" property="gpa" jdbcType="DOUBLE" />
+    <result column="gpa_rank" property="gpaRank" jdbcType="INTEGER" />
+    <result column="gpa_major_student" property="gpaMajorStudent" jdbcType="INTEGER" />
+
   </resultMap>
 </mapper>

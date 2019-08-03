@@ -24,6 +24,12 @@ public class SCService {
         return scList;
     }
 
+    public List<SC> getFullBySid(Integer sid) {
+        List<SC> scList = getBySid(sid);
+        fill(scList);
+        return scList;
+    }
+
     public void fill(List<SC> scList) {
         for (SC sc : scList) {
             fill(sc);

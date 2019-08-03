@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/studentLayout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/teacherLayout">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -13,31 +13,28 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/student/dev">成绩</a>
+                <a href="/teacher/student">学生</a>
             </li>
             <li class="breadcrumb-item">
-                <a th:href="'/student/dev/detail?yid=' + ${yearGrade.id}" th:text="${yearGrade.getSchoolYear()}"></a>
+                <a th:href="'/teacher/student/grade?sid=' + ${yearGrade.student.id}" th:text="${yearGrade.student.name}"></a>
             </li>
-            <li class="breadcrumb-item active" th:text="${type}"></li>
+            <li class="breadcrumb-item active">基础性素质成绩</li>
         </ol>
         <div>
             <div class="container">
                 <div class="card card-login mx-auto mt-5">
-                    <div class="card-header">基础性素质详情</div>
                     <div class="card-body">
-                        <input type="hidden" id="id" th:value="${devDetailRe != null ? devDetailRe.id : null}"/>
-                        <!--<input type="hidden" id="basicScore" th:value="${yearGrade.basicScore}"/>-->
+                        <input type="hidden" id="id" th:value="${yearGrade.id}"/>
+                        <input type="hidden" id="basicScore" th:value="${yearGrade.basicScore}"/>
                         <div class="form-group">
-                            <label for="name">加分项名</label>
-                            <input class="form-control" id="name" name="name" type="text" th:value="${devDetailRe != null ? devDetailRe.name : null}">
+                            <label for="detail">详情</label>
+                            <textarea class="form-control" id="detail" name="detail" th:text="${yearGrade.basicDetail}" rows="8" disabled="disabled"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="kind">加分类型</label>
-                            <select class="form-control" id="kind">
-                                <option th:each="devKind : ${devKindEnumList}" th:text="${devKind.getDesc()}" th:value="${devKind}" th:selected="${devDetailRe != null ? devDetailRe.kind == devKind : null}"></option>
-                            </select>
+                            <label for="score">评分</label>
+                            <input class="form-control" id="score" type="text" th:value="${yearGrade.basicScore}"/>
                         </div>
-                        <button id="submit" class="btn btn-primary btn-block" onclick="submit()" th:text="${type}"></button>
+                        <button id="submit" class="btn btn-primary btn-block" onclick="submit()" th:text="更新"></button>
                     </div>
                 </div>
             </div>
@@ -51,21 +48,24 @@
         <!--</div>-->
         <script>
             function submit() {
-                var yid = [[${yearGrade.id}]];
+                var thisYear = new Date().getFullYear();
+
+                if (thisYear !== [[${yearGrade.year}]]) {
+                    alert("已过期，不可修改");
+                    return;
+                }
                 $.ajax({
-                    url: "/student/dev/add",
+                    url: "/teacher/student/grade/basic/update",
                     data: {
-                        id: $("#id").val(),
-                        name: $("#name").val(),
-                        kind: $("#kind").val(),
-                        yid: yid
+                        yid: $("#id").val(),
+                        score: $("#score").val()
                     },
                     async: false,
                     contentType:"application/x-www-form-urlencoded:charset=UTF-8",
                     success: function (res) {
                         if (res === "success") {
-                            alert("成功");
-                            window.location.href = "/student/dev/detail?yid=" + yid;
+                            alert("更新成功");
+                            window.location.href = "/teacher/student/grade?sid=" + [[${yearGrade.sid}]];
                         } else {
                             alert(res);
                         }

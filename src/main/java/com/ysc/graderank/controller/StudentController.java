@@ -1,15 +1,15 @@
 package com.ysc.graderank.controller;
 
 import com.ysc.graderank.enums.DevKindEnum;
-import com.ysc.graderank.pojo.DevDetail;
-import com.ysc.graderank.pojo.DevDetailRe;
-import com.ysc.graderank.pojo.User;
-import com.ysc.graderank.pojo.YearGrade;
+import com.ysc.graderank.pojo.*;
 import com.ysc.graderank.service.DevDetailService;
+import com.ysc.graderank.service.SCService;
+import com.ysc.graderank.service.StudentService;
 import com.ysc.graderank.service.YearGradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,10 +26,36 @@ public class StudentController {
     private YearGradeService yearGradeService;
     @Autowired
     private DevDetailService devDetailService;
+    @Autowired
+    private StudentService studentService;
+    @Autowired
+    private SCService scService;
 
-    @RequestMapping("/index")
-    public String index() {
+    @GetMapping("/index")
+    public String index(ModelMap modelMap, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        Student student = studentService.getById(user.getId());
+        studentService.fill(student);
+        modelMap.addAttribute("student", student);
         return "student/index";
+    }
+
+    @GetMapping("/password")
+    public String password() {
+        return "student/password";
+    }
+
+    @GetMapping("/password/update")
+    @ResponseBody
+    public String passwordUpdate(String oldPwd, String newPwd, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        Student student = studentService.getById(user.getId());
+        if (!user.getPassword().equals(oldPwd)) {
+            return "原密码错误";
+        }
+        student.setPassword(newPwd);
+        studentService.update(student);
+        return "success";
     }
 
     @RequestMapping("/basic")
@@ -96,7 +122,6 @@ public class StudentController {
     @ResponseBody
     public String devAdd(DevDetail devDetail) {
         if (devDetail.getId() == null) {
-            devDetail.setVerify("未审核");
             devDetailService.insert(devDetail);
         } else {
             devDetailService.update(devDetail);
@@ -111,4 +136,18 @@ public class StudentController {
         return "student/ave";
     }
 
+    @RequestMapping("/com")
+    public String com(HttpServletRequest request, ModelMap modelMap) {
+        User user = (User) request.getSession().getAttribute("user");
+        modelMap.addAttribute("yearGradeList", yearGradeService.getBySid(user.getId()));
+        return "student/com";
+    }
+
+    @GetMapping("/course")
+    public String course(HttpServletRequest request, ModelMap modelMap) {
+        User user = (User) request.getSession().getAttribute("user");
+        List<SC> scList  = scService.getFullBySid(user.getId());
+        modelMap.addAttribute("scList", scList);
+        return "student/course";
+    }
 }
